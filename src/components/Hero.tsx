@@ -27,7 +27,8 @@ const Hero = ({ onSearch }: { onSearch: (documents: DocumentData[]) => void }) =
       const documents = await fetchDocumentsByRut(rut);
       onSearch(documents);
     } catch (error) {
-      setError('Error al buscar documentos. Por favor intente nuevamente.');
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      setError(`Error al buscar documentos. Por favor intente nuevamente. ${errorMessage}`);
     } finally {
       setIsLoading(false);
     }
